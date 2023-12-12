@@ -4,11 +4,11 @@ import { NextRequest, NextResponse } from "next/server";
 const path = require("path");
 type ProcessedFiles = Array<[string, File]>;
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// };
 
 export async function POST(req: NextRequest, res: NextResponse) {
   console.log("processing new pdf...");
@@ -16,7 +16,22 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
   console.log("form", form);
 
-  const file: File = form.get("file");
+  let file: File;
+
+  const fileItem = form.get("file");
+
+  if (fileItem instanceof File) {
+    file = fileItem;
+    // Now you can use 'file' safely here
+  } else {
+    // Handle the case where 'file' is not a File (it might be null or another type)
+    return NextResponse.json(
+      { message: "error" },
+      {
+        status: 400,
+      },
+    );
+  }
 
   console.log("file ", file);
 

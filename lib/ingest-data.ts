@@ -7,7 +7,7 @@ import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
 const SPLIT_CHUNK_SIZE = 1000;
 const SPLIT_CHUNK_OVERLAP = 200;
 
-export const ingestData = async (filePath: string) => {
+export const ingestData = async (filePath: any) => {
   try {
     console.log("filePath", filePath);
 
